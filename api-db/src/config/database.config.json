@@ -1,0 +1,8 @@
+{
+    "database": {
+        "databaseName": "yuem-cli",
+        "local_url": "mongodb://localhost:27017"
+    },
+    "user": "yuem-cli-2",
+    "password": "yuem12345"
+}

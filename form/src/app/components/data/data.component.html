@@ -1,0 +1,200 @@
+<div class="container">
+    <form name="f" [formGroup]="formGroup" class="form">
+        <div *ngIf="mode == 'form'">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Contact data</mat-card-title>
+                    <mat-card-subtitle>Form by <a href="github.com/juanmahecha9">juanmahecha9</a></mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput placeholder="Juan David" formControlName="Name" #name>
+                    <mat-icon matSuffix>rowing</mat-icon>
+                </mat-form-field>
+                <div *ngIf="formErrors.Name" class="err-msg">
+                    The name is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" matInput placeholder="Mahecha Cruz" formControlName="LastName">
+                    <mat-icon matSuffix>rowing</mat-icon>
+                </mat-form-field>
+                <div *ngIf="formErrors.LastName" class="err-msg">
+                    The last name is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Identification type</mat-label>
+                    <mat-select type="text" placeholder="Visa" matInput formControlName="IdType">
+                        <mat-option>None</mat-option>
+                        <mat-option *ngFor="let type of idTypes" [value]="type.name">
+                            {{type.name}}
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+                <div *ngIf="formErrors.IdType" class="err-msg">
+                    The identification type is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Identification</mat-label>
+                    <input type="text" matInput placeholder="MRV200929302101" formControlName="Id">
+                    <mat-icon matSuffix>perm_identity</mat-icon>
+                </mat-form-field>
+                <div *ngIf="formErrors.IdNumber" class="err-msg">
+                    The identification is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Country</mat-label>
+                    <input type="text" placeholder="United States" matInput formControlName="Country"
+                        [matAutocomplete]="auto">
+                    <mat-icon matSuffix>location_searching</mat-icon>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        <mat-option *ngFor="let optionCountry of  filteredOptions | async" [value]="optionCountry">
+                            {{optionCountry.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div *ngIf="formErrors.Country" class="err-msg">
+                    The country is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>City</mat-label>
+                    <input type="text" matInput placeholder="Newark, OH" formControlName="Adress">
+                    <mat-icon matSuffix>directions</mat-icon>
+                </mat-form-field>
+                <div *ngIf="formErrors.Adress" class="err-msg">
+                    The city is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Adress</mat-label>
+                    <input type="text" matInput placeholder="553 Hebron Rd" formControlName="City">
+                    <mat-icon matSuffix>location_city</mat-icon>
+                </mat-form-field>
+                <div *ngIf="formErrors.City" class="err-msg">
+                    The adress name is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Telephone</mat-label>
+                    <span matPrefix>+{{codePhone}} &nbsp;</span>
+                    <input type="number" matInput placeholder="555-555-1234" formControlName="Telephone">
+                    <mat-icon matSuffix>local_phone</mat-icon>
+                </mat-form-field>
+                <div *ngIf="formErrors.Telephone" class="err-msg">
+                    The telephone is required
+                </div>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput placeholder="example.j@example.com" formControlName="Email">
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                </mat-form-field>
+                <div *ngIf="formErrors.Email" class="err-msg">
+                    The email name is required
+                </div>
+
+                <div class="files">
+                    <button matTooltip="Campo destinado para adjuntar archivo de la obra" mat-icon-button>
+                        <mat-icon aria-label="attach file">attach_file</mat-icon> Adjuntar
+                    </button>
+                    <input #fileUpload type="file" name="file-input" multiple style="display: none" />
+                </div>
+                <div class="row justity-content-center">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary" (click)="submit()">Data verify!</button>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
+        <div *ngIf="mode == 'preview'">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Preview contact data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput disabled [value]="data.Name">
+                            <mat-icon matSuffix>rowing</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Last Name</mat-label>
+                            <input type="text" matInput disabled [value]="data.LastName">
+                            <mat-icon matSuffix>rowing</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Identification type</mat-label>
+                            <input type="text" matInput disabled [value]="data.IdType">
+                            <mat-icon matSuffix>perm_identity</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Identification</mat-label>
+                            <input type="text" matInput disabled [value]="data.IdNumber">
+                            <mat-icon matSuffix>perm_identity</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Country</mat-label>
+                            <input type="text" matInput disabled [value]="data.Country">
+                            <mat-icon matSuffix>location_searching</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>City</mat-label>
+                            <input type="text" matInput disabled [value]="data.City">
+                            <mat-icon matSuffix>directions</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Adress</mat-label>
+                            <input type="text" matInput disabled [value]="data.Adress">
+                            <mat-icon matSuffix>location_city</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Telephone</mat-label>
+                            <input type="text" matInput disabled [value]="data.Telephone">
+                            <mat-icon matSuffix>local_phone</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <input type="text" matInput disabled [value]="data.Email">
+                            <mat-icon matSuffix>alternate_email</mat-icon>
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="row justity-content-center">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-success" (click)="onSubmit()">Data send!</button>
+                            <button type="button" class="btn btn-warning" (click)="onBack()">Back!</button>
+                        </div>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </form>
+</div>

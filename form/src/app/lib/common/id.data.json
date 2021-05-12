@@ -1,0 +1,29 @@
+[
+    {
+        "name": "Registro civil de nacimiento"
+    },
+    {
+        "name": "Tarjeta de identidad"
+    },
+    {
+        "name": "Cédula de ciudadanía"
+    },
+    {
+        "name": "Tarjeta de extranjería"
+    },
+    {
+        "name": "Cédula de extranjería"
+    },
+    {
+        "name": "NIT"
+    },
+    {
+        "name": "Pasaporte"
+    },
+    {
+        "name": "Tipo de documento extranjero"
+    },
+    {
+        "name":"Visa"
+    }
+]

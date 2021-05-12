@@ -1,0 +1,46 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr class="text-center text-danger">
+                <th scope="col">Name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Id type</th>
+                <th scope="col">Id</th>
+                <th scope="col">Country</th>
+                <th scope="col">City</th>
+                <th scope="col">Adress</th>
+                <th scope="col">Telephone</th>
+                <th scope="col">Email</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr [ngStyle]="{'text-decoration':option.status === true ? 'line-through' : 'none' }" *ngFor="let option of dataService.dataForm" >
+                <th  scope="row">{{option.Name}}</th>
+                <th>{{option.LastName}}</th>
+                <th>{{option.IdType}}</th>
+                <th>{{option.IdNumber}}</th>
+                <th>{{option.Country}}</th>
+                <th>{{option.City}}</th>
+                <th>{{option.Adress}}</th>
+                <th>{{option.Telephone}}</th>
+                <th>{{option.Email}}</th>
+               
+                <th>
+                    <button [disabled]="option.status" class="m-1 btn btn-outline-info" (click)="editData(option._id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button [disabled]="option.status" class="m-1 btn btn-outline-danger"
+                        (click)="deleteData(option._id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                    <button [disabled]="option.status" class="m-1 btn btn-outline-warning"
+                        (click)="AnulateData(option._id)">
+                        <mat-icon>location_disabled</mat-icon>
+                    </button>
+                </th>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
