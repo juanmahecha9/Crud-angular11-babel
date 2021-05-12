@@ -126,8 +126,6 @@ export class DataComponent implements OnInit {
     return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-
-
   subscribirAEntrada(entrada: string, fn: any) {
     const obs = this.formGroup.get(entrada);
     if (obs != null) {

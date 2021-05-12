@@ -24,11 +24,11 @@ indexDataCtrl.indexGet = async (req, res) => {
 
 indexDataCtrl.indexPost = async (req, res) => {
   let data = new Data(req.body);
-  data.FileName = req.file.originalname;
-  data.FilePath = req.file.path;
+ /*  data.FileName = req.file.originalname;
+  data.FilePath = req.file.path; */
   await data.save();
   res.send(data);
-  console.log(req.file)
+  console.log(req.file);
 };
 
 indexDataCtrl.indexPut = async (req, res) => {
